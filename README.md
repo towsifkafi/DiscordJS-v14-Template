@@ -21,10 +21,11 @@ yarn install
 
  - Your application needs the following intents to be allowed `PRESENCE`, `MESSAGE` and `GUILD MEMBER`. You can enable them in your [Discord Developer Dashboard](https://discord.com/developers/applications) or disable the intents you don't need from `index.js` file. Privileged intents are are marked with comments.
 
-If you use `yarn` for installing packages, you can use `yarn install` and `yarn start`.
 After finishing the cofiguration run - 
 ```
 npm start
+# or
+node index.js
 ```
 
 If everything is done correctly, your terminal should look like this -
