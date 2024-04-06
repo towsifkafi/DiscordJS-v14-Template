@@ -1,15 +1,22 @@
+const args = process.argv.slice(2);
 const fs = require('fs')
 const { PermissionsBitField, REST, Routes } = require('discord.js');
 var colors = require('colors');
 
+if(args[0] == 'sync' || args[0] == 'syncdev') {
+    require('dotenv').config()
+}
+
 const { TOKEN, CLIENT_ID } = process.env
+
 
 //const { Routes } = require('discord-api-types/v10');
 //const { REST } = require('@discordjs/rest');
 
 const api = new REST({ version: '10' }).setToken(TOKEN)
 
-const client = require('../index')
+let client;
+if(!args.length) client = require('../index');
 
 let folder = fs.readdirSync('./commands/slash')
 var slash_commands = []
@@ -17,12 +24,12 @@ var slash_commands = []
 // Importing Files
 
 folder.forEach(dir => {
-    const commands = fs.readdirSync(`./commands/slash/${dir}`).filter(f => f.endsWith('.js'))
+    const commands = fs.readdirSync(`./commands/slash/${dir}`).filter(f => f.endsWith('.js') && !f.startsWith('-'))
     
     for(var i in commands) {
         var command = require(`../commands/slash/${dir}/${commands[i]}`)
         if(command) {
-            client.slashCommands.set(command.name, command)
+            if(!args.length) client.slashCommands.set(command.name, command)
             slash_commands.push(
                 {
                     name: command.name,
@@ -30,17 +37,19 @@ folder.forEach(dir => {
                     type: command.type,
                     options: command.options || null,
                     default_permission: command.default_permission || null,
-                    default_member_permission: command.default_member_permissions ? PermissionsBitField.resolve(command.default_member_permissions).toString() : null
+                    default_member_permission: command.default_member_permissions ? PermissionsBitField.resolve(command.default_member_permissions).toString() : null,
+                    integration_types: command.integration_types || [0],
+                    contexts: command.contexts || [0]
                 }
             )
         }
     }
 });
-const apps = fs.readdirSync(`./apps/`).filter(f => f.endsWith('.js'));
+const apps = fs.readdirSync(`./apps/`).filter(f => f.endsWith('.js') && !f.startsWith('-'));
 for(var i in apps) {
     var app = require(`../apps/${apps[i]}`)
     if(app) {
-        client.slashCommands.set(app.name, app)
+        if(!args.length) client.slashCommands.set(app.name, app)
         slash_commands.push(
             {
                 name: app.name,
@@ -57,11 +66,19 @@ for(var i in apps) {
 (async() => {
 
     try {
-        if(process.env.TEST_GUILD) {
+        
+        if(args[0] == 'sync') {
+            await api.put(Routes.applicationCommands(CLIENT_ID), { body: slash_commands })
+        } else if(args[0] == "syncdev") {
             await api.put(Routes.applicationGuildCommands(CLIENT_ID, process.env.TEST_GUILD), { body: slash_commands })
         } else {
-            await api.put(Routes.applicationGuildCommands(CLIENT_ID), { body: slash_commands })
+            if(process.env.TEST_GUILD) {
+                await api.put(Routes.applicationGuildCommands(CLIENT_ID, process.env.TEST_GUILD), { body: slash_commands })
+            } else {
+                await api.put(Routes.applicationCommands(CLIENT_ID), { body: slash_commands })
+            }
         }
+
         console.log(`| Successfully Registered Slash Commands & Apps`.brightGreen)
     } catch (error) {
         console.log(error);

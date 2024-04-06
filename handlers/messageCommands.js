@@ -5,7 +5,7 @@ const client = require('../index')
 
 let folder = fs.readdirSync('./commands/message')
 folder.forEach(dir => {
-    const commands = fs.readdirSync(`./commands/message/${dir}`).filter(f => f.endsWith('.js'))
+    const commands = fs.readdirSync(`./commands/message/${dir}`).filter(f => f.endsWith('.js') && !f.startsWith('-'))
     for(var i in commands) {
         var command = require(`../commands/message/${dir}/${commands[i]}`)
         if(command) {

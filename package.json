@@ -5,7 +5,9 @@
   "license": "MIT",
   "scripts": {
     "start": "node index.js",
-    "dev": "nodemon index.js"
+    "dev": "nodemon index.js",
+    "sync": "node handlers/slashCommands.js sync",
+    "sync:dev": "node handlers/slashCommands.js syncdev"
   },
   "dependencies": {
     "@discordjs/rest": "^2.2.0",
@@ -14,8 +16,7 @@
     "discord-api-types": "^0.37.76",
     "discord.js": "^14.14.1",
     "dotenv": "^16.0.3",
-    "ms": "^2.1.3",
-    "v9": "link:@discord/discord-api-types/v9"
+    "ms": "^2.1.3"
   },
   "devDependencies": {
     "eslint": "^8.37.0"
