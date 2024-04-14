@@ -1,19 +1,34 @@
-const { EmbedBuilder, Collection, PermissionsBitField } = require('discord.js');
+const { EmbedBuilder, Collection, PermissionsBitField, InteractionType } = require('discord.js');
 const ms = require('ms')
 
 const client = require('..')
 const cooldowns = new Collection();
 
 client.on('interactionCreate', async (interaction) => {
+    if(interaction.type !== InteractionType.ModalSubmit) return;
+
+    const modal = client.modals.get(interaction.customId)
+    if(!modal) return client.modals.delete(interaction.customId)
+
+    await modal.execute(client, interaction)
+})
+
+client.on('interactionCreate', async (interaction) => {
+    if(interaction.type !== InteractionType.ApplicationCommandAutocomplete) return;
+
     const command = client.slashCommands.get(interaction.commandName)
     if(!command) return client.slashCommands.delete(interaction.commandName)
 
-    if(interaction.type !== 2) return;
-
     if(command.autocomplete) {
-        let choices = [];
-        await command.autocomplete(interaction, choices)
+        await command.autocomplete(interaction)
     }
+})
+
+client.on('interactionCreate', async (interaction) => {
+    if(interaction.type !== InteractionType.ApplicationCommand) return;
+
+    const command = client.slashCommands.get(interaction.commandName)
+    if(!command) return client.slashCommands.delete(interaction.commandName)
 
     // Function to send a message inside embed to save time and code
     // Only if the interaction is already replied.

@@ -45,21 +45,31 @@ folder.forEach(dir => {
         }
     }
 });
-const apps = fs.readdirSync(`./apps/`).filter(f => f.endsWith('.js') && !f.startsWith('-'));
-for(var i in apps) {
-    var app = require(`../apps/${apps[i]}`)
-    if(app) {
-        if(!args.length) client.slashCommands.set(app.name, app)
-        slash_commands.push(
-            {
-                name: app.name,
-                type: app.type,
-                default_permission: app.default_permission || null,
-                default_member_permission: app.default_member_permissions ? PermissionsBitField.resolve(app.default_member_permissions).toString() : null
-            }
-        )
+
+let appsFolder = fs.readdirSync('./apps/')
+
+appsFolder.forEach(dir => {
+    if(dir == 'modal') return
+    
+    const apps = fs.readdirSync(`./apps/${dir}`).filter(f => f.endsWith('.js') && !f.startsWith('-'))
+
+    for(var i in apps) {
+        var app = require(`../apps/${dir}/${apps[i]}`)
+        if(app) {
+            if(!args.length) client.slashCommands.set(app.name, app)
+            slash_commands.push(
+                {
+                    name: app.name,
+                    type: app.type,
+                    default_permission: app.default_permission || null,
+                    default_member_permission: app.default_member_permissions ? PermissionsBitField.resolve(app.default_member_permissions).toString() : null
+                }
+            )
+        }
     }
-}
+
+});
+
 
 // Put Commands to Discord API
 

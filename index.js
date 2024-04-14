@@ -27,6 +27,7 @@ client.commands = new Collection()
 client.events = new Collection()
 client.aliases = new Collection()
 client.slashCommands = new Collection()
+client.modals = new Collection()
 
 module.exports = client;
 
