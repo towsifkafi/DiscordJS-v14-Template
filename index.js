@@ -17,7 +17,6 @@ const client = new Client({
 })
 
 // Settings
-
 client.settings = {
     prefix: config.prefix,
     color: config.color
@@ -31,17 +30,7 @@ client.modals = new Collection()
 
 module.exports = client;
 
-// Event Handler
-
-var events = fs.readdirSync('./events')
-events = events.filter(f => f.endsWith('.js'))
-for(let i in events) {
-    require(`./events/${events[i]}`)
-    client.events.set(events[i], 'loaded')
-}
-
 // Importing Handlers
-
 var handlers = fs.readdirSync('./handlers')
 handlers = handlers.filter(f => f.endsWith('js'))
 for(let i in handlers) {
