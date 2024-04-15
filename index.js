@@ -32,9 +32,10 @@ module.exports = client;
 
 // Importing Handlers
 var handlers = fs.readdirSync('./handlers')
-handlers = handlers.filter(f => f.endsWith('js'))
+handlers = handlers.filter(f => f.endsWith('js') && !f.startsWith('-'))
 for(let i in handlers) {
-    require(`./handlers/${handlers[i]}`)
+    let handler = require(`./handlers/${handlers[i]}`)
+    if(handler) handler.execute(client)
 }
 
 // Preventing Unwanted Crashes
