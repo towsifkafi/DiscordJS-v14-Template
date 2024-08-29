@@ -32,6 +32,6 @@ If everything is done correctly, your terminal should look like this -
 ![Start](assets/startup.png)
 #
 
-[<img src="https://img.shields.io/static/v1?style=for-the-badge&message=towsifkafi&color=5865F2&logo=Discord&logoColor=FFFFFF&label=">](https://discord.com/users/674660356819517440)
+[<img src="https://img.shields.io/static/v1?style=for-the-badge&message=towsif.kafi&color=5865F2&logo=Discord&logoColor=FFFFFF&label=">](https://discord.com/users/565102845926572033)
 <br>
-If you happen to spot any problem or errors in this project, please create a pull request or  contact me through my Discord, which is [**towsifkafi**](https://discord.com/users/674660356819517440). I'm always open to receiving direct messages and would be more than happy to help you out in any way possible.
+If you happen to spot any problem or errors in this project, please create a pull request or  contact me through my Discord, which is [**towsif.kafi**](https://discord.com/users/565102845926572033). I'm always open to receiving direct messages and would be more than happy to help you out in any way possible.
