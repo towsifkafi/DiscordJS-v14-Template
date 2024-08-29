@@ -48,7 +48,7 @@ async function getSlashCommands(client) {
 
 async function getApps(client) {
     let appsFolder = fs.readdirSync('./apps/')
-    let apps = []
+    let appsList = []
 
     appsFolder.forEach(dir => {
         if(dir == 'modal') return
@@ -59,7 +59,7 @@ async function getApps(client) {
             var app = require(`../apps/${dir}/${apps[i]}`)
             if(app) {
                 if(client) client.slashCommands.set(app.name, app)
-                apps.push(
+                appsList.push(
                     {
                         name: app.name,
                         type: app.type,
@@ -72,7 +72,7 @@ async function getApps(client) {
 
     });
 
-    return apps;
+    return appsList;
 }
 
 async function registerCommands(client, dev = false) {
