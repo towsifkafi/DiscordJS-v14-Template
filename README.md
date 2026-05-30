@@ -1,6 +1,6 @@
 <center>
  <img src="assets/readme_banner.png">
- <h3>Discord.JS v14 Template</h3>
+ <h3>Discord.JS v14 Template (Typescript)</h3>
 </center>
 
 **A simple Discord.js message command/slash command and apps handler template. I created this project to simplify the process of creating new bots and avoid writing the same code again.**
@@ -8,24 +8,20 @@
 Some of the main focuses of this template are **command/event handlers** and **app handlers**. Command handlers also include **permissions, aliases, and autocomplete** functionality. 
 
 ## How to Install
- - You'll need [NodeJS](https://nodejs.org/en) (16.11+). And a package manager for node. (npm, pnpm or yarn)
+ - You'll need [NodeJS](https://nodejs.org/en) (22.12.0+). And a package manager for node. (npm, pnpm or yarn)
  - To get started with this project clone this repository to a folder and execute the following commands to that folder.
 ```bash
 npm install 
 # or
 pnpm install
-# or
-yarn install
 ```
- - Once all dependencies are installed, rename `.env_copy` to `.env` and enter environment values `CLIENT_ID`, `TOKEN` and `TEST_GUILD` in this file. If you leave `TEST_GUILD` empty, the bot will register slash commands to all servers.
+ - Once all dependencies are installed, rename `.env.example` to `.env` and enter environment values `CLIENT_ID`, `TOKEN` and `TEST_GUILD` in this file. If you leave `TEST_GUILD` empty, the bot will register slash commands to all servers.
 
  - Your application needs the following intents to be allowed `PRESENCE`, `MESSAGE` and `GUILD MEMBER`. You can enable them in your [Discord Developer Dashboard](https://discord.com/developers/applications) or disable the intents you don't need from `index.js` file. Privileged intents are are marked with comments.
 
 After finishing the cofiguration run - 
 ```
-npm start
-# or
-node index.js
+npm run dev
 ```
 
 If everything is done correctly, your terminal should look like this -

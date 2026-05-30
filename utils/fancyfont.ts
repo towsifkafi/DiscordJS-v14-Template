@@ -1,5 +1,5 @@
-function roundsquares(text) {
-    var roundsquaresMap = {
+export function roundsquares(text: string): string {
+    const roundsquaresMap: Record<string, string> = {
         'A': '🅰️', 'B': '🅱️', 'C': '🅲️', 'D': '🅳️', 'E': '🅴️', 'F': '🅵️',
         'G': '🅶️', 'H': '🅷️', 'I': '🅸️', 'J': '🅹️', 'K': '🅺️', 'L': '🅻️',
         'M': '🅼️', 'N': '🅽️', 'O': '🅾️', 'P': '🅿️', 'Q': '🆀️', 'R': '🆁️',
@@ -8,15 +8,15 @@ function roundsquares(text) {
         '4': '4️⃣', '5': '5️⃣', '6': '6️⃣', '7': '7️⃣', '8': '8️⃣', '9': '9️⃣'
     };
 
-    var roundsquaresText = '';
-    for (var i = 0; i < text.length; i++) {
+    let roundsquaresText = '';
+    for (let i = 0; i < text.length; i++) {
         roundsquaresText += roundsquaresMap[text[i]] || text[i];
     }
     return roundsquaresText;
 }
 
-function bubbles(text) {
-    var bubblesMap = {
+export function bubbles(text: string): string {
+    const bubblesMap: Record<string, string> = {
         '0': '⓪', '1': '①', '2': '②', '3': '③', '4': '④', '5': '⑤',
         '6': '⑥', '7': '⑦', '8': '⑧', '9': '⑨', 'A': 'Ⓐ', 'B': 'Ⓑ',
         'C': 'Ⓒ', 'D': 'Ⓓ', 'E': 'Ⓔ', 'F': 'Ⓕ', 'G': 'Ⓖ', 'H': 'Ⓗ',
@@ -30,20 +30,20 @@ function bubbles(text) {
         'y': 'ⓨ', 'z': 'ⓩ'
     };
 
-    var bubblesText = '';
-    for (var i = 0; i < text.length; i++) {
+    let bubblesText = '';
+    for (let i = 0; i < text.length; i++) {
         bubblesText += bubblesMap[text[i]] || text[i];
     }
     return bubblesText;
 }
 
-function creepify(text) {
-    var creepified = "";
-    var diacriticsTop = ['̅', '̲', '̶']; // Add more diacritics as per original implementation
-    var diacriticsMiddle = ['̑', '̆', '̕']; // Add more diacritics as per original implementation
-    var diacriticsBottom = ['̂', '̍', '̄']; // Add more diacritics as per original implementation
+export function creepify(text: string): string {
+    let creepified = "";
+    const diacriticsTop = ['̅', '̲', '̶'];
+    const diacriticsMiddle = ['̑', '̆', '̕'];
+    const diacriticsBottom = ['̂', '̍', '̄'];
 
-    for (var i = 0; i < text.length; i++) {
+    for (let i = 0; i < text.length; i++) {
         creepified += text[i];
         if (Math.random() < 0.5) {
             creepified += diacriticsTop[Math.floor(Math.random() * diacriticsTop.length)];
@@ -58,8 +58,8 @@ function creepify(text) {
     return creepified;
 }
 
-function bent(text) {
-    var bentMap = {
+export function bent(text: string): string {
+    const bentMap: Record<string, string> = {
         'a': 'ą', 'b': 'ҍ', 'c': 'ç', 'd': 'ժ', 'e': 'ҽ', 'f': 'ƒ',
         'g': 'ց', 'h': 'հ', 'i': 'ì', 'j': 'ʝ', 'k': 'ҟ', 'l': 'Ӏ',
         'm': 'ʍ', 'n': 'ղ', 'o': 'օ', 'p': 'ք', 'q': 'զ', 'r': 'ɾ',
@@ -71,13 +71,9 @@ function bent(text) {
         'W': 'చ', 'X': 'ჯ', 'Y': 'Ӌ', 'Z': 'ɀ'
     };
 
-    var bentText = '';
-    for (var i = 0; i < text.length; i++) {
+    let bentText = '';
+    for (let i = 0; i < text.length; i++) {
         bentText += bentMap[text[i]] || text[i];
     }
     return bentText;
 }
-
-module.exports = { 
-    roundsquares, bubbles, creepify, bent
- }
